@@ -11,9 +11,12 @@ class TrafficMap {
         }).addTo(this.map);
     }
 
-    registerClickListener(){
+    registerClickListener(onClick){
+        
         this.map.on('click', (e) => {
-            console.log(`tu longitud es ${e.latlng.lng}. y tu latitude es ${e.latlng.lat}`);
+            const longitude = e.latlng.lng
+            const latitude = e.latlng.lat
+            onClick(longitude, latitude);
         });
     }
 
