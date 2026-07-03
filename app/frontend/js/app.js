@@ -1,3 +1,5 @@
 const trafficMap  = new TrafficMap();
 
-trafficMap .createMap();
+trafficMap.createMap();
+
+trafficMap.registerClickListener();

@@ -10,4 +10,11 @@ class TrafficMap {
             attribution: '© OpenStreetMap'
         }).addTo(this.map);
     }
+
+    registerClickListener(){
+        this.map.on('click', (e) => {
+            console.log(`tu longitud es ${e.latlng.lng}. y tu latitude es ${e.latlng.lat}`);
+        });
+    }
+
 }
