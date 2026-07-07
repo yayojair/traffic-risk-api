@@ -16,7 +16,7 @@ class TrafficMap {
         this.map.on('click', (e) => {
             const longitude = e.latlng.lng
             const latitude = e.latlng.lat
-            onClick(longitude, latitude);
+            onClick(latitude,longitude);
         });
     }
 
