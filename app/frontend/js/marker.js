@@ -4,7 +4,7 @@ class TrafficMarker{
         this.currentMarker = null
     }
 
-    createMarker(latitude,longitude, prediction){
+    createMarker(prediction){
         //eliminamos un marker en caso de que ya exista uno
         if (this.currentMarker) {
             this.map.removeLayer(this.currentMarker);
@@ -16,6 +16,9 @@ class TrafficMarker{
             `<li>${risk}: <strong>${(probability * 100).toFixed(1)}%</strong></li>`
         )
         .join("");
+
+        const longitude = prediction.locations.longitude
+        const latitude = prediction.locations.latitude
 
         const colorPrediction = (risk) => {
             const colores = {
@@ -44,6 +47,7 @@ class TrafficMarker{
 
                         <p><strong>📍 Coordenadas</strong></p>
                         <small>
+                            Dirección: ${prediction.address}<br>
                             Latitude: ${latitude.toFixed(6)}<br>
                             Longitude: ${longitude.toFixed(6)}
                         </small>

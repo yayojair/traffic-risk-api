@@ -16,15 +16,21 @@ class TrafficService:
         probabilities = {
             category: prob for category, prob in zip(categories, probabilities)
         }
-        return RiskResult(risk=risk, confidence=confidence, probabilities=probabilities)
+       
+        locations = {"latitude":latitude, "longitude":longitude}
+        
+        address = self.geocoding_service.geocode_locations(locations)
+
+        return RiskResult(risk=risk, confidence=confidence, locations=locations, address=address, probabilities=probabilities)
 
     def calculate_risk_address(self, address):
 
-        longitude, latitude = self.geocoding_service.geocode_address(address)
+        longitude, latitude, addressApi = self.geocoding_service.geocode_address(address)
 
         risk, probabilities, categories = self.prediction_engine.predict(longitude, latitude)
         confidence = np.max(probabilities)
         probabilities = {
             category: prob for category, prob in zip(categories, probabilities)
         }
-        return RiskResult(risk=risk, confidence=confidence, probabilities=probabilities)
+        locations = {"latitude":latitude, "longitude":longitude}
+        return RiskResult(risk=risk, confidence=confidence, locations=locations, address=addressApi, probabilities=probabilities)

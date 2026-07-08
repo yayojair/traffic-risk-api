@@ -30,4 +30,28 @@ class ApiToFastApi{
             console.error("Ocurrió un error:", error);
         }
     }
+
+    async addressRisk(addressRisk, endpoint){
+        const ad = { address: addressRisk}
+        try {
+            const response = await fetch(`${this.baseUrl}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ad)
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
+            const datos = await response.json();
+            
+            return datos
+
+        } catch (error) {
+            console.error("Ocurrió un error:", error);
+        } 
+    }
 }
