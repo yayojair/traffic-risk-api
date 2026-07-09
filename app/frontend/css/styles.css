@@ -3,3 +3,64 @@
     height: 550px;  /* O height: 100vh; ocupa toda la pantalla */
     width: 100%;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.hidden{
+    display:none;
+}
+
+.spinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+
+
+.circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5%;
+    animation: subirBajar 2s ease-in-out  infinite;
+}
+
+#circle-red {
+    animation-delay: 0s;
+    background:#fa0000;
+}
+#circle-yellow {
+    animation-delay: 0.3s;
+    background:#faed00;
+}
+#circle-green {
+    animation-delay: 0.6s;
+    background:#11fa00;
+}
+
+@keyframes subirBajar {
+    0% {
+        transform: translateY(0); /* Abajo */
+    }
+    50% {
+        transform: translateY(-25px); /* Arriba (valor negativo sube) */
+    }
+    100% {
+        transform: translateY(0); /* Vuelve abajo */
+    }
+}
