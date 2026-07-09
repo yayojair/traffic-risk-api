@@ -6,58 +6,50 @@ class ApiToFastApi{
     async queryServer(latitude, longitude, endpoint){
         // debe de coincidir con los datos de entrada de la api
         const coordenadas = { latitude: latitude, longitude: longitude };
-        try {
-            // 1. Espera (await) a que el servidor responda los encabezados
-            const response = await fetch(`${this.baseUrl}${endpoint}`, {
-                method: 'POST', // Especificas el método HTTP
-                headers: {
-                    'Content-Type': 'application/json' // Le avisas al backend que le mandas un JSON
-                },
-                body: JSON.stringify(coordenadas) // Conviertes tu objeto JS a una cadena de texto JSON
-            })
+        // 1. Espera (await) a que el servidor responda los encabezados
+        const response = await fetch(`${this.baseUrl}${endpoint}`, {
+            method: 'POST', // Especificas el método HTTP
+            headers: {
+                'Content-Type': 'application/json' // Le avisas al backend que le mandas un JSON
+            },
+            body: JSON.stringify(coordenadas) // Conviertes tu objeto JS a una cadena de texto JSON
+        })
+        
+        if (!response.ok) {
             
-            if (!response.ok) {
-                throw {
-                    status: response.status,
-                    message: error.detail
-                };
-            }
-
-            // 2. Espera (await) a que se descargue y transforme el JSON por completo
-            const datos = await response.json();
-            
-            return datos
-
-        } catch (error) {
-            // El bloque try/catch atrapa cualquier error de red o del servidor
-            console.error("Ocurrió un error:", error);
+            throw {
+                status: response.status,
+                message: response.statusText
+            };
         }
+
+        // 2. Espera (await) a que se descargue y transforme el JSON por completo
+        const datos = await response.json();
+        
+        return datos
     }
 
     async addressRisk(addressRisk, endpoint){
         const ad = { address: addressRisk}
-        try {
-            const response = await fetch(`${this.baseUrl}${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ad)
-            });
-            
-            if (!response.ok) {
-                throw {
-                    status: response.status,
-                    message: error.detail
-                };
-            }
+        
+        const response = await fetch(`${this.baseUrl}${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ad)
+        });
+        
+        if (!response.ok) {
+            throw {
+                status: response.status,
+                message: response.statusText
+            };
+        }
 
-            const datos = await response.json();
-            
-            return datos
+        const datos = await response.json();
+        
+        return datos
 
-        } catch (error) {
-            console.error("Ocurrió un error:", error);
-        } 
     }
 }

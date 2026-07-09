@@ -42,8 +42,10 @@ searchAddressRisk.searchAddressRisk( async address => {
         const prediction = await apiToFastApi.addressRisk(address,'address');
         trafficMarker.createMarker(prediction);
     } catch (error) {
+        console.log("error desde app");
+        console.log(error);
         switch (error.status) {
-
+            
             case 400:
                 notification.showError(error.message);
                 break;
