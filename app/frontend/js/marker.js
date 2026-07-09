@@ -1,7 +1,42 @@
 class TrafficMarker{
     constructor(map){
-        this.map = map
-        this.currentMarker = null
+        this.map = map;
+        this.currentMarker = null;
+    }
+
+    getMarkerColor(risk) {
+        switch(risk){
+
+            case "alto":
+                return "red";
+
+            case "moderado_alto":
+                return "orange";
+
+            case "moderado_bajo":
+                return "yellow";
+
+            case "bajo":
+            case "nulo":
+                return "green";
+
+            default:
+                return "";
+        }
+        
+
+    }
+
+    createIcon(color){
+        return new L.Icon({
+            iconUrl: `images/marker-icon-${color}.png`,
+            shadowUrl: "images/marker-icon-white.png",
+
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
     }
 
     createMarker(prediction){
@@ -17,9 +52,13 @@ class TrafficMarker{
         )
         .join("");
 
-        const longitude = prediction.locations.longitude
-        const latitude = prediction.locations.latitude
+        const longitude = prediction.locations.longitude;
+        const latitude = prediction.locations.latitude;
 
+
+        const color = this.getMarkerColor(prediction.risk);
+        const iconColor = this.createIcon(color);
+ 
         const colorPrediction = (risk) => {
             const colores = {
                 alto: "🔴",
@@ -33,7 +72,7 @@ class TrafficMarker{
         };
 
         //crear el marker sobre el mapa con la predicion
-        this.currentMarker = L.marker([latitude, longitude]).addTo(this.map)
+        this.currentMarker = L.marker([latitude, longitude], {icon: iconColor}).addTo(this.map)
         .bindPopup(`<div class="popup-content">
                         <h3>🚦 Traffic Risk</h3>
 
