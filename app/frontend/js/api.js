@@ -17,7 +17,10 @@ class ApiToFastApi{
             })
             
             if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+                throw {
+                    status: response.status,
+                    message: error.detail
+                };
             }
 
             // 2. Espera (await) a que se descargue y transforme el JSON por completo
@@ -43,7 +46,10 @@ class ApiToFastApi{
             });
             
             if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+                throw {
+                    status: response.status,
+                    message: error.detail
+                };
             }
 
             const datos = await response.json();

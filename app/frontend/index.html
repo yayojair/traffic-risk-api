@@ -27,10 +27,22 @@
         <p>Analizando riesgo...</p>
     </div>
 
+    <div id="show-error" class="overlay hidden">
+        <div class="container-error"> 
+            
+            <div class="error-icon">✕</div>
+            <div class="error-content">
+                <h3>Hubo un problema</h3>
+                <p id="text-error"></p>
+            </div>
+        </div>
+    </div>
+
     <div id="map"></div>
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
+    <script src="js/notification.js"></script>
     <script src="js/loading.js"></script>
     <script src="js/search.js"></script>
     <script src="js/api.js"></script>

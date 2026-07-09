@@ -1,5 +1,6 @@
 const trafficMap  = new TrafficMap();
 const loading = new Loading();
+const notification = new Notification();
 
 trafficMap.createMap();
 const trafficMarker = new TrafficMarker(trafficMap.map);
@@ -13,7 +14,20 @@ trafficMap.registerClickListener(async (latitude,longitude) => {
         const prediction = await apiToFastApi.queryServer(latitude, longitude, 'risk');
         trafficMarker.createMarker(prediction);
     } catch (error) {
-        alert("lo siento algo salio mal.")
+        
+        switch (error.status) {
+
+            case 400:
+                notification.showError(error.message);
+                break;
+
+            case 404:
+                notification.showError(error.message);
+                break;
+
+            default:
+                notification.showError("Ha ocurrido un error inesperado.");
+        }
     }finally{
         loading.hide();
     }
@@ -28,7 +42,19 @@ searchAddressRisk.searchAddressRisk( async address => {
         const prediction = await apiToFastApi.addressRisk(address,'address');
         trafficMarker.createMarker(prediction);
     } catch (error) {
-        alert("lo siento algo salio mal.")
+        switch (error.status) {
+
+            case 400:
+                notification.showError(error.message);
+                break;
+
+            case 404:
+                notification.showError(error.message);
+                break;
+
+            default:
+                notification.showError("Ha ocurrido un error inesperado.");
+        }
     } finally{
         loading.hide();
     }
