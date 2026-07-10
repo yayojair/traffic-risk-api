@@ -1,11 +1,13 @@
-html, body {
-    overflow: hidden;
+body{
+
+    overflow-x:hidden;
+
 }
 
 
 #map {
     margin-top: 10px;
-    height: 550px;
+    height: 420px;
     width: 100%;
 
 }
@@ -29,9 +31,9 @@ html, body {
 
 
 .container-error {
-    width: 100%;
-    max-width: 400px;
-    padding: 24px;
+    width:min(90vw, 400px);
+    padding:clamp(16px,4vw,24px);
+    box-sizing:border-box;
     border-radius: 12px; 
     background-color: #ffffff;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -46,8 +48,8 @@ html, body {
 .error-icon {
     background-color: #ffeeef;
     color: #ef4444;
-    width: 32px;
-    height: 32px;
+    width:clamp(28px,8vw,32px);
+    height:clamp(28px,8vw,32px);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -56,18 +58,21 @@ html, body {
     flex-shrink: 0;
 }
 
+.error-content{
+    word-break: break-word;
+}
 
 .error-content h3 {
     margin: 0 0 4px 0;
     color: #1e293b; 
-    font-size: 16px;
+    font-size:clamp(.95rem,3vw,1rem);
     font-weight: 600;
 }
 
 .error-content p {
     margin: 0;
     color: #64748b;
-    font-size: 14px;
+    font-size:clamp(.8rem,2.8vw,.9rem);
     line-height: 1.5;
 }
 
@@ -106,7 +111,95 @@ html, body {
     background: #4ade80;
 }
 
+.legend-risk-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+
+.legend-risk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.legend-risk li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #475569; 
+}
+
+.legend-marker-icon{
+    width: 15px;
+    height: 20px;
+}
+
+.legend-ghost{
+    display: block;
+}
 @keyframes subirBajar {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
+}
+
+/*responsive*/
+
+/* ---------- Tablet ---------- */
+
+@media(max-width:768px){
+
+    #map{
+
+        height:50vh;
+
+    }
+
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:576px){
+
+    #form-btn-risk{
+
+        flex-direction:column;
+
+    }
+
+    .btn-success{
+
+        width:100%;
+
+    }
+
+    .legend-risk-section{
+
+        align-items:flex-start;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .container-error{
+
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+
+    }
+
 }

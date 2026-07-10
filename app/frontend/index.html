@@ -18,7 +18,7 @@
     <main class="container py-4">
         
         <header class="mb-4">
-            <h1 class="display-5 fw-bold text-slate-800">🚦 API de riesgo de tráfico</h1>
+            <h1 class="fw-bold text-slate-800">🚦 API de riesgo de tráfico</h1>
         </header>
 
         <section class="search-section mb-4">
@@ -29,7 +29,7 @@
                        placeholder="Ingresa una dirección (Ej: Calle República de Uruguay, Centro...)" 
                        aria-describedby="search-help"
                        required />
-                <button class="btn btn-success px-4" type="submit">Buscar</button>
+                <button class="btn btn-success " type="submit">Buscar</button>
             </form>
             <div id="search-help" class="form-text mt-2 text-muted">
                 <strong>Formato recomendado:</strong> Vía pública / Vialidad, Colonia, Alcaldía, Entidad Federativa, Código Postal, País.
@@ -38,6 +38,21 @@
 
         <section class="map-section">
             <div id="map" class="rounded-3 shadow-sm"></div>
+        </section>
+
+        <section class="legend-risk-section">
+            <div class="legend-title">
+                <h2 class="h6 m-0 fw-bold text-secondary">Leyenda de riesgo</h2>
+            </div>
+            
+            <ul class="legend-risk" aria-label="Niveles de riesgo de tráfico">
+                <li><img class="legend-marker-icon" src="images/marker-icon-red.png" alt="marcador rojo"> Alto</li>
+                <li><img class="legend-marker-icon" src="images/marker-icon-orange.png" alt="marcador naranja"> Moderado alto</li>
+                <li><img class="legend-marker-icon" src="images/marker-icon-yellow.png" alt="marcador amarillo"> Moderado bajo</li>
+                <li><img class="legend-marker-icon" src="images/marker-icon-green.png" alt="marcador verde"> Bajo/Nulo</li>
+            </ul>
+                        
+            <div class="legend-ghost" aria-hidden="true"></div>
         </section>
 
     </main>
@@ -69,7 +84,7 @@
     <script src="js/api.js"></script>
     <script src="js/marker.js"></script>
     <script src="js/map.js"></script>
-    <script src="js/search.js"></script>
+    <script defer src="js/search.js"></script>
 
     <script src="js/app.js"></script>
     
