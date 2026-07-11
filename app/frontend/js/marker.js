@@ -10,10 +10,10 @@ class TrafficMarker{
             case "alto":
                 return "red";
 
-            case "moderado_alto":
+            case "modo_alta":
                 return "orange";
 
-            case "moderado_bajo":
+            case "modo_bajo":
                 return "yellow";
 
             case "bajo":
@@ -21,7 +21,7 @@ class TrafficMarker{
                 return "green";
 
             default:
-                return "";
+                return "fault";
         }
         
 
@@ -29,8 +29,8 @@ class TrafficMarker{
 
     createIcon(color){
         return new L.Icon({
-            iconUrl: `images/marker-icon-${color}.png`,
-            shadowUrl: "images/marker-icon-white.png",
+            iconUrl: `/static/images/marker-icon-${color}.png`,
+            shadowUrl: "/static/images/marker-icon-white.png",
 
             iconSize: [25, 41],
             iconAnchor: [12, 41],
@@ -62,8 +62,8 @@ class TrafficMarker{
         const colorPrediction = (risk) => {
             const colores = {
                 alto: "🔴",
-                moderado_alto: "🟠",
-                moderado_bajo: "🟡",
+                modo_alta: "🟠",
+                modo_bajo: "🟡",
                 bajo: "🟢"
             };
             

@@ -5,7 +5,8 @@ from app.services.traffic_service import TrafficService
 from app.ml.prediction_engine import PredictionEngine
 from app.services.geocoding_service import GeocodingService
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -29,20 +30,12 @@ app = FastAPI(title="Traffic Risk API",
     version="1.0.0",
     lifespan=lifespan)
 
-app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[
-            "http://127.0.0.1:5500"
-        ],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
 
 # Incluimos las rutas con un prefijo para versionar la API
 app.include_router(api_router, prefix="/api/v1")
+app.mount("/static", StaticFiles(directory="app/frontend"), name="frontend")
 
-@app.get("/")
+@app.get("/", response_class=FileResponse)
 def read_root():
-    return {"message": "Traffic Risk API is running"}
+    return FileResponse("app/frontend/index.html")
 
